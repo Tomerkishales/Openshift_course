@@ -2,29 +2,29 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
 # set your lab user name
-  name: user15-hello-world
+  name: {{ .Chart.Name }}
 spec:
-  replicas: 3
+  replicas: {{ .Values.ReplicaNumber }}
   selector:
-    matchLabels:
+    matchLabels:{{ .Chart.Name }}
 # set your lab user name
       app: user15-hello-world
   template:
     metadata:
-      labels:
+      labels: {{ .Chart.Name }
 # set your lab user name
         app: user15-hello-world
     spec:
       containers:
         - resources: {}
           terminationMessagePath: /dev/termination-log
-          name: hello-world
+          name:  {{ .Chart.Name }
           ports:
-            - containerPort: 8080
+            - containerPort: {{ .Values.containers.containerPort }}
               protocol: TCP
           imagePullPolicy: IfNotPresent
 # Update with the image you build in part 1
-          image: 'quay.io/tomerki/app:v2'
+          image: {{ .Values.containers.image }}:{{ .Values.containers.tag }}
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
   strategy:
