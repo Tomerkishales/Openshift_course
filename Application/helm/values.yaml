@@ -2,7 +2,7 @@ ReplicaNumber: 3
 
 containers:
   containerPort: 8080
-  image: 'quay.io/quay-tomerki/app'
+  image: 'quay.io/tomerki/app'
   tag: 'v2'
 
 service:
